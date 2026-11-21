@@ -143,8 +143,9 @@ body.prof-on .p-sso{display:block}
 <script>
 /* ── 포털에 보일 앱 목록: 새 앱은 여기에 한 줄 추가 ───────────── */
 const APPS = [
-  { id: 'exercise', sso: 'zgv', group: 'g2', name: '운동치료', kicker: '2학년 · 주차별 수업', url: 'https://pt-exercise.vercel.app/', icon: 'run', color: '#5380f0',
-    desc: '2분 요약 영상 · 개념 카드 · 형성평가 · 오개념 노트 · QR 출석 · 실시간 투표', tags: ['18주', '퀴즈', '출석', '실시간 투표'] },
+  { id: 'exercise', sso: 'zgv', group: 'g2', name: '운동치료 및 실습', kicker: '2학년 · 1학기·2학기 각 15주', url: 'https://pt-exercise.vercel.app/', icon: 'run', color: '#5380f0',
+    desc: '1학기 운동치료 기초 · 2학기 질환별 중재 · 2분 요약 영상 · 개념 카드 · 형성평가 · QR 출석 · 실시간 투표', tags: ['학기별 15주', '중간·기말', '출석', '실시간 투표'],
+    subs: [['2학년 1학기', '#/term/1'], ['2학년 2학기', '#/term/2']] },
   { id: 'anatomy', sso: 'zgv', group: 'g1', name: '기능해부학', kicker: '1학년 · 주차별 수업', url: 'https://pt-anatomy-one.vercel.app/', icon: 'bone', color: '#0f6e74',
     desc: '주차별 학습 · 근육 카드 · 용어 · 형성평가', tags: ['15주', '근육 카드', '용어'] },
   { id: 'aidx', sso: 'aidx', group: 'g1', name: 'AIDX 주간 결과물', kicker: '1학년 · 팀 프로젝트', url: 'https://aidx-feedback.vercel.app/', icon: 'team', color: '#7a3fd1',
@@ -163,7 +164,7 @@ const APPS = [
   { id: 'exam', group: 'prof', name: '국가고시 모의고사 문제은행', kicker: '교수용 · 나만 보기', url: 'https://claude.ai/artifact/DgB4JQ9W3RrcCRRu813gwA', icon: 'exam', color: '#27417f', newtab: true,
     desc: 'Claude 출제 초안 → 교수 검토·승인 → 회차별 시험지 Word 내보내기 · 기출 가져오기 · 중복 검사', tags: ['4과목', '1~5회', '중복 검사', 'Word'] },
   { id: 'backup', sso: 'zgv', group: 'prof', name: '수업 웹앱 백업 센터', kicker: '교수용 · 교수 로그인', url: 'https://pt-exercise.vercel.app/#/account', icon: 'backup', color: '#5e9a2e',
-    desc: '7개 앱(운동치료·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX)을 한 파일로 백업 · 앱별 복원 · 복원 전 자동 백업', tags: ['7개 앱', '한 파일', '미리 보기 복원'] },
+    desc: '7개 앱(운동치료 및 실습·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX)을 한 파일로 백업 · 앱별 복원 · 복원 전 자동 백업', tags: ['7개 앱', '한 파일', '미리 보기 복원'] },
   // 국가고시 모의고사 자동출제(스트림릿판): 주소가 생기면 아래 줄의 url을 채우고 앞의 // 를 지우세요.
   // { id: 'exam2', group: 'prof', name: '국가고시 모의고사 자동출제', kicker: '교수용', url: '', icon: 'exam', color: '#27417f', desc: '과목별 회차 출제 · 문제은행 · 워드 내보내기', tags: ['교수용'] },
 ];
@@ -199,7 +200,7 @@ const ICONS = {
   chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
   backup: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>'
 };
-const QUICK = [['run', '운동치료', 'exercise'], ['bone', '해부학', 'anatomy'], ['cell', '병리학', 'pathology'], ['heart', '생리학', 'physiology'], ['sport', '스포츠재활', 'sports'], ['form', '설문도구', 'quest'], ['team', 'AIDX', 'aidx'], ['chat', '상담', 'counsel']];
+const QUICK = [['run', '운동치료·실습', 'exercise'], ['bone', '해부학', 'anatomy'], ['cell', '병리학', 'pathology'], ['heart', '생리학', 'physiology'], ['sport', '스포츠재활', 'sports'], ['form', '설문도구', 'quest'], ['team', 'AIDX', 'aidx'], ['chat', '상담', 'counsel']];
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
 const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.form}</svg>`;
 const live = APPS.filter(a => a.url);
@@ -309,7 +310,7 @@ setView();
   };
   function login() {
     const m = document.createElement('div'); m.className = 'p-mod';
-    m.innerHTML = `<form><h3>교수 로그인 (모든 수업 앱 공통)</h3><p style="margin:0;font-size:.85rem;color:#6b7a90">운동치료·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX·지도교수 상담을 이 계정 하나로 엽니다.</p>
+    m.innerHTML = `<form><h3>교수 로그인 (모든 수업 앱 공통)</h3><p style="margin:0;font-size:.85rem;color:#6b7a90">운동치료 및 실습·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX·지도교수 상담을 이 계정 하나로 엽니다.</p>
       <label>학교 메일<input name="em" type="email" autocomplete="username" value="${esc(CFG.profEmail || '')}" required></label>
       <label>비밀번호<input name="pw" type="password" autocomplete="current-password" required></label>
       <p class="err"></p><div class="row"><button type="button" class="no">취소</button><button class="go">로그인</button></div></form>`;
