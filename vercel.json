@@ -1,0 +1,1 @@
+{ "cleanUrls": true, "redirects": [ { "source": "/portal.html", "destination": "/", "permanent": true }, { "source": "/portal", "destination": "/", "permanent": true } ] }

@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>물리치료과 학습 포털 | 청암대학교</title>
+<meta name="description" content="청암대학교 물리치료과 수업 웹앱 모음: 기능해부학 · 운동치료 · 병리학 · 생리학 · 스포츠재활 · 환자 설문도구 · AIDX">
+<meta name="theme-color" content="#27417f">
+<link rel="stylesheet" href="univ-kit/univ-kit.css">
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:var(--u-bg,#f4f7fd);color:#363b4f;font-size:16px;line-height:1.6;word-break:keep-all}
+main{max-width:1180px;margin:0 auto;padding:20px 18px 10px}
+a{color:inherit}
+/* 머리 내비 */
+.p-nav{background:#fff;border-bottom:3px solid var(--u-navy);box-shadow:0 2px 10px rgba(10,42,92,.06);position:sticky;top:0;z-index:20}
+.p-nav .in{max-width:1180px;margin:0 auto;padding:10px 18px;display:flex;align-items:center;gap:12px}
+.p-brand{display:flex;align-items:center;gap:10px;text-decoration:none}
+.p-brand small{display:block;font-size:.7rem;color:#6b7a90;font-weight:700;line-height:1.2} .p-brand b{color:var(--u-navy);font-size:1.08rem;line-height:1.2}
+.p-nav .grow{flex:1}
+.p-search{display:flex;align-items:center;gap:6px;background:var(--u-bg);border:1px solid var(--u-line);border-radius:99px;padding:6px 12px;min-width:220px}
+.p-search input{border:0;background:transparent;font:inherit;outline:none;width:100%}
+.p-search svg{width:16px;height:16px;stroke:#6b7a90;fill:none;stroke-width:2}
+/* 배너 */
+.p-hero{position:relative;overflow:hidden;border-radius:16px;color:#fff;background:linear-gradient(115deg,var(--u-navy) 0%,#3f66cf 55%,var(--u-sky) 100%);min-height:230px}
+.p-hero::after{content:"";position:absolute;inset:0;background:var(--u-art) right bottom/auto 100% no-repeat;pointer-events:none}
+.p-hero .in{position:relative;z-index:1;padding:30px 32px;max-width:620px}
+.p-hero h1{margin:10px 0 6px;font-size:clamp(1.6rem,4.4vw,2.5rem);font-weight:900;letter-spacing:-.02em;line-height:1.25}
+.p-hero p{margin:0;color:#d9e5f7}
+.p-stats{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.p-stats span{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);border-radius:10px;padding:6px 12px;font-size:.85rem}
+.p-stats b{color:var(--u-gold);font-size:1.05rem;margin-right:4px}
+/* 퀵메뉴 */
+.p-quick{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;background:#fff;border-radius:14px;padding:14px 10px;box-shadow:var(--u-sh);margin:-14px 14px 0;position:relative;z-index:2}
+.p-q{display:flex;flex-direction:column;align-items:center;gap:6px;text-decoration:none;font-size:.82rem;font-weight:700;padding:6px 2px;border-radius:10px;text-align:center}
+.p-q .ic{width:48px;height:48px;border-radius:50%;display:grid;place-items:center;background:#eaf0fe;transition:.15s}
+.p-q svg{width:24px;height:24px;fill:none;stroke:var(--u-blue);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.p-q:hover .ic{background:var(--u-blue)} .p-q:hover svg{stroke:#fff}
+/* 필터 */
+.p-tabs{display:flex;gap:6px;flex-wrap:wrap;margin:26px 0 6px}
+.p-tabs button{font:inherit;font-weight:700;font-size:.9rem;border:1px solid var(--u-line);background:#fff;color:#46566f;border-radius:99px;padding:7px 16px;cursor:pointer}
+.p-tabs button.on{background:var(--u-navy);border-color:var(--u-navy);color:#fff}
+.p-tabs button:focus-visible{outline:3px solid var(--u-gold);outline-offset:2px}
+/* 묶음 · 카드 */
+.p-group{margin-top:22px}
+.p-group>h2{position:relative;padding-left:12px;color:var(--u-navy);font-size:1.15rem;margin:0 0 4px}
+.p-group>h2::before{content:"";position:absolute;left:0;top:.2em;bottom:.2em;width:4px;border-radius:2px;background:var(--u-blue)}
+.p-group>p{margin:0 0 12px;color:#6b7a90;font-size:.9rem}
+.p-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+.p-card{position:relative;display:flex;flex-direction:column;gap:8px;background:#fff;border:1px solid var(--u-line);border-top:4px solid var(--c,var(--u-blue));border-radius:14px;box-shadow:var(--u-sh);padding:18px 18px 16px;text-decoration:none;transition:transform .12s,box-shadow .12s}
+.p-card:hover{transform:translateY(-3px);box-shadow:0 10px 24px rgba(10,42,92,.12)}
+.p-card:focus-within{outline:3px solid var(--u-gold);outline-offset:3px}
+.p-main{color:inherit;text-decoration:none} .p-main::after{content:"";position:absolute;inset:0;border-radius:14px} .p-main:focus{outline:none}
+.p-subs{position:relative;z-index:2}
+.p-top{display:flex;gap:12px;align-items:flex-start}
+.p-ic{width:46px;height:46px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--c,var(--u-blue)) 12%,#fff);flex:none}
+.p-ic svg{width:26px;height:26px;fill:none;stroke:var(--c,var(--u-blue));stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.p-card small.k{display:block;color:var(--c,var(--u-blue));font-weight:800;font-size:.75rem}
+.p-card h3{margin:2px 0 0;font-size:1.12rem;color:var(--u-navy);line-height:1.3}
+.p-card p{margin:0;color:#46566f;font-size:.9rem}
+.p-tags{display:flex;flex-wrap:wrap;gap:5px}
+.p-tags span{background:#eef2fc;color:#46566f;border-radius:6px;padding:2px 8px;font-size:.75rem;font-weight:600}
+.p-go{margin-top:auto;display:flex;justify-content:space-between;align-items:center;font-weight:800;color:var(--u-blue);font-size:.9rem;padding-top:6px;border-top:1px dashed var(--u-line)}
+.p-go em{font-style:normal;color:#8a97ab;font-weight:600;font-size:.78rem}
+.p-subs{display:flex;flex-wrap:wrap;gap:6px}
+.p-subs a{font-size:.8rem;font-weight:700;color:var(--u-navy);background:#fff8e1;border:1px solid #f5e1a1;border-radius:8px;padding:3px 9px;text-decoration:none}
+.p-subs a:hover{background:var(--u-gold)}
+.p-empty{background:#fff;border:1px dashed var(--u-line);border-radius:14px;padding:28px;text-align:center;color:#6b7a90}
+.p-menu{background:#fff;border-bottom:1px solid var(--u-line)} .p-menu .in{display:flex;gap:4px;max-width:1180px;margin:0 auto;padding:0 20px}
+.p-menu a{display:inline-flex;align-items:center;gap:6px;padding:12px 16px;font-weight:800;font-size:.95rem;color:#46566f;text-decoration:none;border-bottom:3px solid transparent;margin-bottom:-1px}
+.p-menu a.on{color:var(--u-navy);border-bottom-color:var(--u-blue)} .p-menu a:hover{color:var(--u-blue)}
+.p-menu a b:empty{display:none} .p-menu a b{font-size:.72rem;background:#eef2fc;color:var(--u-navy);border-radius:99px;padding:1px 8px}
+.l-head{margin:26px 0 6px} .l-head h2{color:var(--u-navy);font-size:1.3rem;margin:0 0 4px} .l-head p{margin:0;color:#6b7a90;font-size:.9rem}
+.l-filter{display:flex;gap:6px;flex-wrap:wrap;margin:14px 0}
+.l-filter button{font:inherit;font-weight:700;font-size:.85rem;border:1px solid var(--u-line);background:#fff;color:#46566f;border-radius:99px;padding:6px 14px;cursor:pointer}
+.l-filter button.on{background:var(--u-navy);border-color:var(--u-navy);color:#fff}
+.l-card{background:#fff;border:1px solid var(--u-line);border-top:4px solid var(--u-blue);border-radius:14px;box-shadow:var(--u-sh);padding:16px 18px;display:flex;flex-direction:column;gap:8px}
+.l-card .subj{font-size:.78rem;font-weight:800;color:var(--u-blue)} .l-card h3{margin:0;font-size:1.15rem;color:var(--u-navy)} .l-card p{margin:0;color:#46566f;font-size:.9rem}
+.l-acc{display:inline-flex;align-items:center;gap:6px;font-size:.8rem;font-weight:800;border-radius:8px;padding:4px 10px;width:max-content}
+.l-acc.pub{background:#e6f4ea;color:#1f7a45} .l-acc.prof{background:#fff4d6;color:#8a5a00} .l-acc.chk{background:#eef1f6;color:#5b6576}
+.l-note{font-size:.8rem!important;color:#6b7a90!important}
+.l-open{margin-top:auto;align-self:flex-start;display:inline-flex;gap:6px;align-items:center;background:var(--u-blue);color:#fff;font-weight:800;text-decoration:none;border-radius:10px;padding:9px 16px}
+.l-open:hover{background:var(--u-navy)} .l-open:focus-visible{outline:3px solid var(--u-gold);outline-offset:2px}
+.v-learn #quick,.v-learn #grade,.v-learn #tabs,.v-learn #list{display:none!important} #learnView[hidden]{display:none!important}
+.l-foot{margin-top:18px;font-size:.85rem;color:#6b7a90}
+/* 내 학년 */
+.p-grade{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin:22px 0 0;background:#fff;border:1px solid var(--u-line);border-radius:14px;padding:12px 16px;box-shadow:var(--u-sh)}
+.p-grade.ask{border:2px solid var(--u-gold);background:#fffaf0}
+.p-grade b{color:var(--u-navy);margin-right:4px} .p-grade small{color:#6b7a90;flex-basis:100%}
+.p-grade button{font:inherit;font-weight:800;font-size:.9rem;border:1px solid var(--u-line);background:#fff;color:var(--u-navy);border-radius:99px;padding:6px 16px;cursor:pointer}
+.p-grade button.on{background:var(--u-gold);border-color:var(--u-gold);color:#363b4f}
+.p-grade button:focus-visible{outline:3px solid var(--u-blue);outline-offset:2px}
+.p-group.mine>h2::after{content:"내 학년";margin-left:8px;vertical-align:middle;font-size:.72rem;font-weight:800;background:var(--u-gold);color:#363b4f;border-radius:99px;padding:2px 9px}
+.p-tip{margin:26px 0 0;background:#fff;border:1px solid var(--u-line);border-left:4px solid var(--u-gold);border-radius:12px;padding:14px 18px;font-size:.9rem;color:#46566f}
+@media (max-width:720px){.p-hero::after{opacity:.3}.p-hero .in{padding:24px 20px}.p-search{min-width:0;flex:1}.p-brand small{display:none}.p-quick{margin:-10px 6px 0;grid-template-columns:repeat(4,minmax(0,1fr))}}
+</style>
+<style>
+.p-prof{display:flex;align-items:center;gap:6px;margin-right:10px;font-size:.85rem}
+.p-prof button{font:inherit;font-weight:800;border:1px solid var(--u-line,#dde3ee);background:#fff;color:var(--u-navy,#27417f);border-radius:99px;padding:6px 14px;cursor:pointer}
+.p-prof .on{background:#eaf6ee;border-color:#9ccfab;color:#1f7a45}
+.p-sso{display:none;margin:10px auto 0;max-width:1180px;padding:0 20px;font-size:.85rem;color:#1f7a45}
+body.prof-on .p-sso{display:block}
+.p-mod{position:fixed;inset:0;background:rgba(20,30,50,.45);display:flex;align-items:flex-start;justify-content:center;padding:12vh 12px;z-index:100}
+.p-mod form{background:#fff;border-radius:16px;padding:22px;max-width:380px;width:100%;display:grid;gap:10px;box-shadow:0 20px 50px rgba(0,0,0,.25)}
+.p-mod h3{margin:0;color:var(--u-navy,#27417f)} .p-mod label{display:grid;gap:4px;font-size:.85rem;font-weight:700}
+.p-mod input{font:inherit;padding:10px 12px;border:1px solid #c9d2e3;border-radius:10px}
+.p-mod .row{display:flex;gap:8px;justify-content:flex-end} .p-mod button{font:inherit;font-weight:800;border-radius:10px;padding:9px 16px;border:0;cursor:pointer}
+.p-mod .go{background:var(--u-blue,#5380f0);color:#fff} .p-mod .no{background:#eef1f6} .p-mod .err{color:#c03535;font-size:.85rem;min-height:1em;margin:0}
+.p-wait{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#27417f;color:#fff;padding:10px 18px;border-radius:12px;font-weight:700;z-index:101}
+</style>
+</head>
+<body data-univ="portal">
+<header class="p-nav"><div class="in">
+  <a class="p-brand" href="/"><span class="uk-logo"><img src="univ-kit/logo.png" alt="청암대학교 로고"></span><span><small>청암대학교 물리치료과</small><b>학습 포털</b></span></a>
+  <div class="grow"></div>
+  <div class="p-prof" id="prof"></div>
+  <label class="p-search" aria-label="수업 앱 찾기"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="q" type="search" placeholder="과목·앱 찾기 (예: 생리, 설문)"></label>
+</div></header>
+<nav class="p-menu" aria-label="포털 메뉴"><div class="in"><a href="#apps" data-v="apps">수업 앱</a><a href="#learn" data-v="learn">학습 웹앱 <b id="lCnt"></b></a></div></nav>
+<main>
+  <section class="p-hero"><div class="in">
+    <span class="uk-kick">청암대학교 물리치료과</span>
+    <h1>물리치료과 학습 포털</h1>
+    <p>수업 웹앱을 한곳에서. 과목을 고르면 해당 학습 앱이 열립니다.</p>
+    <div class="p-stats" id="stats"></div>
+  </div></section>
+  <p class="p-sso">🔐 교수 로그인 중 — 아래 앱 카드를 누르면 그 앱에도 <b>자동으로 교수 로그인</b>된 채 열립니다.</p>
+  <nav class="p-quick" id="quick" aria-label="자주 쓰는 바로가기"></nav>
+  <div class="p-grade" id="grade" role="group" aria-label="내 학년"></div>
+  <div class="p-tabs" role="tablist" id="tabs"></div>
+  <div id="list"></div>
+  <section id="learnView" hidden aria-labelledby="lTitle">
+    <div class="l-head"><h2 id="lTitle">학습 웹앱</h2><p>학과·과목별로 따로 만든 학습 웹앱 모음입니다. 「열기」를 누르면 <b>원래 웹앱이 새 탭에서</b> 열리고, 로그인과 이용 권한은 각 웹앱이 그대로 관리합니다.</p></div>
+    <div class="l-filter" id="lFilter"></div>
+    <div class="p-grid" id="lList"></div>
+    <p class="l-foot" id="lHid" hidden>교수자용 앱은 오른쪽 위 「교수 로그인」 후에 함께 보입니다.</p>
+    <p class="l-foot">접근 상태 — <span class="l-acc pub">학생 공개</span> 학생도 이용 · <span class="l-acc prof">교수자용</span> 교수자만 이용(학생 접속 미확인 포함) · <span class="l-acc chk">확인 중</span> 이용 범위 확인 중</p>
+  </section>
+  <p class="p-tip">💡 휴대폰 홈 화면에 이 포털을 추가해 두면 모든 수업 앱을 한 번에 찾을 수 있어요. (Safari·Chrome 메뉴 → <b>홈 화면에 추가</b>)</p>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="js/config.js"></script>
+<script>
+/* ── 포털에 보일 앱 목록: 새 앱은 여기에 한 줄 추가 ───────────── */
+const APPS = [
+  { id: 'exercise', sso: 'zgv', group: 'g2', name: '운동치료', kicker: '2학년 · 주차별 수업', url: 'https://pt-exercise.vercel.app/', icon: 'run', color: '#5380f0',
+    desc: '2분 요약 영상 · 개념 카드 · 형성평가 · 오개념 노트 · QR 출석 · 실시간 투표', tags: ['18주', '퀴즈', '출석', '실시간 투표'] },
+  { id: 'anatomy', sso: 'zgv', group: 'g1', name: '기능해부학', kicker: '1학년 · 주차별 수업', url: 'https://pt-anatomy-one.vercel.app/', icon: 'bone', color: '#0f6e74',
+    desc: '주차별 학습 · 근육 카드 · 용어 · 형성평가', tags: ['15주', '근육 카드', '용어'] },
+  { id: 'aidx', sso: 'aidx', group: 'g1', name: 'AIDX 주간 결과물', kicker: '1학년 · 팀 프로젝트', url: 'https://aidx-feedback.vercel.app/', icon: 'team', color: '#7a3fd1',
+    desc: '근골격계 질환 팀 프로젝트 결과물 제출 · 교수 피드백', tags: ['팀 과제', '피드백'] },
+  { id: 'pathology', sso: 'zgv', group: 'g1', name: '물리치료사를 위한 병리학', kicker: '1학년 · 전공 문제 학습', url: 'https://pt-pathology.vercel.app/', icon: 'cell', color: '#7a2e4a',
+    desc: '문제를 풀고 해설로 배우고, 잊을 때쯤 다시 만나는 병리학', tags: ['장별 문제', '오답 노트', '간격 반복'] },
+  { id: 'physiology', sso: 'zgv', group: 'g1', name: '물리치료사를 위한 생리학', kicker: '1학년 · 전공 문제 학습', url: 'https://physiology-learning.vercel.app/', icon: 'heart', color: '#e5484d',
+    desc: '학습목표 → 문제 → 해설 → 오개념 심화학습 (14장)', tags: ['14장', '확신도', '심화학습'] },
+  { id: 'sports', sso: 'zgv', group: 'g3', name: '스포츠재활총론', kicker: '3학년 · 전공 문제 학습', url: 'https://sports-rehab-learning.vercel.app/', icon: 'sport', color: '#5e9a2e',
+    desc: '상해선수 재활 · 치유 과정 · 복귀 판단을 문제와 해설로 (24장)', tags: ['24장', '확신도', '심화학습'] },
+  { id: 'quest', sso: 'zgv', group: 'clinic', name: '물리치료 환자 설문도구', kicker: '임상 실습 도구', url: 'https://pt-questionaires.vercel.app/', icon: 'form', color: '#2f6f6a',
+    desc: '부위별 표준 설문 채점 · 결과 해석 · 운동 처방 · 임상의사결정 연습', tags: ['QuickDASH', 'ODI', 'KOOS', 'PGQ'],
+    subs: [['어깨·팔꿈치·손', 'upper/'], ['엉덩·무릎·발', 'lower/'], ['목·등·허리', 'spine/'], ['산전·산후', 'perinatal/']] },
+  { id: 'counsel', sso: 'cs', group: 'life', name: '지도교수 상담', kicker: '학과 생활 · 학생 상담', url: 'https://pt-counseling.vercel.app/', icon: 'chat', color: '#c76a00',
+    desc: '상담 신청·사전 질문지 · 내 상담 내역 · 익명 질문 / 교수: 일정 확정 · 상담 일지 · 후속 조치', tags: ['학기 3회 상담', '익명 질문', '상담 일지'] },
+  { id: 'exam', group: 'prof', name: '국가고시 모의고사 문제은행', kicker: '교수용 · 나만 보기', url: 'https://claude.ai/artifact/DgB4JQ9W3RrcCRRu813gwA', icon: 'exam', color: '#27417f', newtab: true,
+    desc: 'Claude 출제 초안 → 교수 검토·승인 → 회차별 시험지 Word 내보내기 · 기출 가져오기 · 중복 검사', tags: ['4과목', '1~5회', '중복 검사', 'Word'] },
+  { id: 'backup', sso: 'zgv', group: 'prof', name: '수업 웹앱 백업 센터', kicker: '교수용 · 교수 로그인', url: 'https://pt-exercise.vercel.app/#/account', icon: 'backup', color: '#5e9a2e',
+    desc: '7개 앱(운동치료·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX)을 한 파일로 백업 · 앱별 복원 · 복원 전 자동 백업', tags: ['7개 앱', '한 파일', '미리 보기 복원'] },
+  // 국가고시 모의고사 자동출제(스트림릿판): 주소가 생기면 아래 줄의 url을 채우고 앞의 // 를 지우세요.
+  // { id: 'exam2', group: 'prof', name: '국가고시 모의고사 자동출제', kicker: '교수용', url: '', icon: 'exam', color: '#27417f', desc: '과목별 회차 출제 · 문제은행 · 워드 내보내기', tags: ['교수용'] },
+];
+/* ── 학습 웹앱 목록: 한 줄 = 카드 하나 (메뉴 「학습 웹앱」) ─────────────
+   name 앱 이름 · subject 분류(학과 / 과목) · desc 한 줄 소개 · url 주소(https) · access 접근 상태: '학생 공개' | '교수자용' | '확인 중'
+   note 접근 설명(선택) · button 버튼 글자(선택, 기본 「열기」)
+   ※ 주소와 이용 권한이 확인되지 않은 앱은 넣지 마세요. 포털은 링크만 걸고, 시험지·정답·강의 자료를 복제하지 않습니다. */
+const LEARN_APPS = [
+  { name: '운동치료 강의실', subject: '물리치료학과 / 운동치료', desc: '1~18주차 강의, 복습문제, 중간·기말고사 자가점검', url: 'https://exercise-therapy-course-18.ptyang.chatgpt.site/', access: '교수자용', note: '소유자 전용 · 학생 계정의 접속이 확인될 때까지 교수자용으로 표시', button: '강의실 열기' },
+];
+const GROUPS = [
+  ['g1', '1학년 수업', '1학년 교과 수업 앱'],
+  ['g2', '2학년 수업', '2학년 교과 수업 앱'],
+  ['g3', '3학년 수업', '3학년 교과 수업 앱'],
+  ['major', '전공 문제 학습', '학년과 상관없이 문제·해설로 공부하는 전공 과목'],
+  ['clinic', '임상 실습 도구', '실습·사례 수업에서 쓰는 평가 도구'],
+  ['life', '학과 생활', '학년과 상관없이 쓰는 학과 생활 앱 · 학생은 학번과 접속 코드로 로그인'],
+  ['prof', '교수용', '출제·관리 도구 · 어느 학년 탭에서나 맨 아래에 보입니다. 교수 계정으로 로그인해야 쓸 수 있습니다 (문제은행은 claude.ai 로그인).'],
+];
+const ICONS = {
+  run: '<circle cx="14" cy="4.5" r="2"/><path d="M8 21l3-6 3 2v4M6 12l3-4 4 1 3 3 3 1"/>',
+  bone: '<path d="M7 4a2.5 2.5 0 0 0-2 4l11 11a2.5 2.5 0 1 0 4-2 2.5 2.5 0 1 0-2-4L7 2a2.5 2.5 0 0 0-2 2z"/>',
+  team: '<circle cx="8" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M2.5 20a5.5 5.5 0 0 1 11 0M14 20a4 4 0 0 1 7.5-2"/>',
+  cell: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="3"/><circle cx="7.5" cy="8" r=".8"/><circle cx="16" cy="15.5" r=".8"/>',
+  heart: '<path d="M12 20s-7-4.4-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 10c0 5.6-7 10-7 10z"/><path d="M5 12h3l2-3 2 5 2-2h5"/>',
+  sport: '<circle cx="12" cy="12" r="8.5"/><path d="M12 3.5v17M3.5 12h17M6 6c3 2.5 9 2.5 12 0M6 18c3-2.5 9-2.5 12 0"/>',
+  form: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 11h7M8.5 15h4"/>',
+  exam: '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/>',
+  chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  backup: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>'
+};
+const QUICK = [['run', '운동치료', 'exercise'], ['bone', '해부학', 'anatomy'], ['cell', '병리학', 'pathology'], ['heart', '생리학', 'physiology'], ['sport', '스포츠재활', 'sports'], ['form', '설문도구', 'quest'], ['team', 'AIDX', 'aidx'], ['chat', '상담', 'counsel']];
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const svg = k => `<svg viewBox="0 0 24 24" aria-hidden="true">${ICONS[k] || ICONS.form}</svg>`;
+const live = APPS.filter(a => a.url);
+const GKEY = 'ptPortalGrade';
+const getG = () => { try { return localStorage.getItem(GKEY) || ''; } catch (e) { return ''; } };
+const setG = v => { try { v ? localStorage.setItem(GKEY, v) : localStorage.removeItem(GKEY); } catch (e) { } };
+let grade = getG();               // 'g1' | 'g2' | 'g3' | 'all' | ''(아직 안 고름)
+let tab = grade && grade !== 'all' ? grade : 'all', query = '';
+const order = () => { const G = GROUPS.slice(); if (grade && grade !== 'all') { const i = G.findIndex(g => g[0] === grade); if (i > 0) G.unshift(G.splice(i, 1)[0]); } return G; };
+function drawGrade() {
+  const el = document.getElementById('grade'), opts = [['g1', '1학년'], ['g2', '2학년'], ['g3', '3학년'], ['all', '전체 보기']];
+  el.className = 'p-grade' + (grade ? '' : ' ask');
+  el.innerHTML = `<b>${grade ? '내 학년' : '내 학년을 골라 주세요'}</b>${opts.map(([k, t]) => `<button type="button" data-g="${k}" class="${grade === k ? 'on' : ''}" aria-pressed="${grade === k}">${t}</button>`).join('')}
+    <small>${grade ? '다음에 포털을 열어도 이 학년 앱이 먼저 보여요. 언제든 바꿀 수 있어요.' : '한 번 고르면 다음부터 내 학년 수업 앱이 먼저 보여요 (이 기기에만 저장).'}</small>`;
+  el.querySelectorAll('button').forEach(b => b.onclick = () => { grade = b.dataset.g; setG(grade); tab = grade === 'all' ? 'all' : grade; drawGrade(); drawQuick(); drawTabs(); draw(); });
+}
+function drawQuick() {
+  const L = QUICK.map(q => [q, APPS.find(x => x.id === q[2])]).filter(([, a]) => a && a.url);
+  if (grade && grade !== 'all') L.sort((x, y) => (y[1].group === grade) - (x[1].group === grade));
+  document.getElementById('quick').innerHTML = L.map(([[ic, t], a]) => `<a class="p-q" href="${esc(a.url)}"><span class="ic">${svg(ic)}</span>${esc(t)}</a>`).join('');
+}
+
+document.getElementById('stats').innerHTML = `<span><b>${live.filter(a => !['prof', 'life'].includes(a.group)).length}</b>개 수업 앱</span><span><b>${new Set(live.filter(a => !['prof', 'life'].includes(a.group)).map(a => a.group)).size}</b>개 분야</span><span><b>모바일</b>에서도 그대로</span>`;
+
+/* 교수 로그인(교수 권한 확인)일 때만 교수용 카드·탭과 학습 웹앱의 '교수자용' 카드를 보여 줌 — 화면 정리용이며, 실제 보호는 각 앱의 로그인이 맡음 */
+let PROF = false;
+window.setProf = on => { on = !!on; if (on === PROF) return; PROF = on; if (!PROF && tab === 'prof') tab = grade && grade !== 'all' ? grade : 'all'; drawTabs(); draw(); if (window.drawLearn) drawLearn(); };
+const tabsOf = () => [['all', '전체'], ...order().filter(g => (g[0] !== 'prof' || PROF) && live.some(a => a.group === g[0])).map(g => [g[0], g[1]])];
+function drawTabs() {
+  document.getElementById('tabs').innerHTML = tabsOf().map(([k, t]) => `<button role="tab" aria-selected="${k === tab}" class="${k === tab ? 'on' : ''}" data-t="${k}">${esc(t)}</button>`).join('');
+  document.querySelectorAll('#tabs button').forEach(b => b.onclick = () => { tab = b.dataset.t; drawTabs(); draw(); });
+}
+function card(a) {
+  return `<article class="p-card" style="--c:${esc(a.color)}">
+    <div class="p-top"><span class="p-ic">${svg(a.icon)}</span><div><small class="k">${esc(a.kicker)}</small><h3><a class="p-main" href="${esc(a.url)}"${a.newtab ? ' target="_blank" rel="noopener"' : ''}>${esc(a.name)}</a></h3></div></div>
+    <p>${esc(a.desc)}</p><div class="p-tags">${(a.tags || []).map(t => `<span>${esc(t)}</span>`).join('')}</div>
+    ${a.subs ? `<div class="p-subs">${a.subs.map(([t, p]) => `<a href="${esc(a.url + p)}">${esc(t)}</a>`).join('')}</div>` : ''}
+    <span class="p-go" aria-hidden="true">바로가기 →<em>${esc(a.newtab ? 'Claude 아티팩트 · 새 창' : a.url.replace(/^https?:\/\//, '').replace(/\/$/, ''))}</em></span></article>`;
+}
+function draw() {
+  const qq = query.trim().toLowerCase();
+  const hit = a => !qq || [a.name, a.kicker, a.desc, ...(a.tags || [])].join(' ').toLowerCase().includes(qq);
+  const html = order().filter(g => g[0] === 'prof' ? PROF : (tab === 'all' || tab === g[0])).map(([k, t, sub]) => {
+    const L = live.filter(a => a.group === k && hit(a));
+    return L.length ? `<section class="p-group${k === grade ? ' mine' : ''}"><h2>${esc(t)}</h2><p>${esc(sub)}</p><div class="p-grid">${L.map(card).join('')}</div></section>` : '';
+  }).join('');
+  document.getElementById('list').innerHTML = html || `<div class="p-empty">"${esc(query)}"에 맞는 수업 앱이 없어요.</div>`;
+}
+document.getElementById('q').oninput = e => { query = e.target.value; draw(); };
+drawGrade(); drawQuick(); drawTabs(); draw();
+
+/* ── 메뉴: 수업 앱 / 학습 웹앱 ── */
+const LA = LEARN_APPS.filter(a => a && a.name && /^https:\/\//.test(a.url || ''));
+let lSubj = '';
+const accCls = a => a === '학생 공개' ? 'pub' : a === '교수자용' ? 'prof' : 'chk';
+const accIc = a => a === '학생 공개' ? '👥' : a === '교수자용' ? '🔒' : '⏳';
+function drawLearn() {
+  const qq = query.trim().toLowerCase(), subjects = [...new Set(LA.filter(a => PROF || a.access !== '교수자용').map(a => a.subject.split('/')[0].trim()))];
+  document.getElementById('lFilter').innerHTML = subjects.length > 1 ? ['', ...subjects].map(x => `<button type="button" data-s="${esc(x)}" class="${x === lSubj ? 'on' : ''}">${esc(x || '전체')}</button>`).join('') : '';
+  document.querySelectorAll('#lFilter button').forEach(b => b.onclick = () => { lSubj = b.dataset.s; drawLearn(); });
+  const VIS = LA.filter(a => PROF || a.access !== '교수자용'), hid = LA.length - VIS.length;
+  document.getElementById('lCnt').textContent = VIS.length || '';
+  const L = VIS.filter(a => (!lSubj || a.subject.startsWith(lSubj)) && (!qq || [a.name, a.subject, a.desc, a.access, a.note].join(' ').toLowerCase().includes(qq)));
+  document.getElementById('lList').innerHTML = L.map(a => `<article class="l-card"><span class="subj">${esc(a.subject)}</span><h3>${esc(a.name)}</h3><p>${esc(a.desc)}</p>
+      <span class="l-acc ${accCls(a.access)}">${accIc(a.access)} ${esc(a.access)}</span>${a.note ? `<p class="l-note">${esc(a.note)}</p>` : ''}
+      <a class="l-open" href="${esc(a.url)}" target="_blank" rel="noopener noreferrer">${esc(a.button || '열기')} ↗</a></article>`).join('') || `<div class="p-empty">${qq ? `"${esc(query)}"에 맞는 학습 웹앱이 없어요.` : '아직 학생에게 공개된 학습 웹앱이 없어요.'}</div>`;
+  document.getElementById('lHid').hidden = PROF || !hid;
+}
+function setView() {
+  const v = location.hash === '#learn' ? 'learn' : 'apps';
+  document.querySelectorAll('.p-menu a').forEach(a => { a.classList.toggle('on', a.dataset.v === v); a.setAttribute('aria-current', a.dataset.v === v ? 'page' : 'false'); });
+  document.body.classList.toggle('v-learn', v === 'learn');
+  document.getElementById('learnView').hidden = v !== 'learn';
+  if (v === 'learn') drawLearn();
+}
+window.drawLearn = drawLearn; drawLearn();
+window.addEventListener('hashchange', setView);
+document.getElementById('q').addEventListener('input', () => { if (location.hash === '#learn') drawLearn(); });
+setView();
+</script>
+<script>
+/* ── 교수 통합 로그인: 포털에서 한 번 로그인 → 카드로 여는 앱마다 자동 로그인 ──
+   포털은 별도 주소(pt-portal) · 모든 앱은 한 번 쓰는 로그인 표를 받아 주소 뒤 #sso= 로 넘김(앱이 받자마자 지움)
+   AIDX는 서버가 달라 그쪽 교수 세션을 받아 넘김 */
+(function () {
+  if (!window.supabase || !window.CFG) return;
+  const remember = () => { try { return localStorage.getItem('ptex_prof_remember') !== '0'; } catch (e) { return true; } };
+  const authStore = { getItem: k => { try { return localStorage.getItem(k) ?? sessionStorage.getItem(k); } catch (e) { return null; } },
+    setItem: (k, v) => { try { if (remember()) { localStorage.setItem(k, v); sessionStorage.removeItem(k); } else { sessionStorage.setItem(k, v); localStorage.removeItem(k); } } catch (e) { } },
+    removeItem: k => { try { localStorage.removeItem(k); sessionStorage.removeItem(k); } catch (e) { } } };
+  const sb = window.supabase.createClient(CFG.url, CFG.key, { auth: { storage: authStore, persistSession: true, autoRefreshToken: true, storageKey: 'ptex-prof-auth' } });
+  let S = null;
+  const box = document.getElementById('prof');
+  let profFor = null; // 교수 권한 확인한 사용자 id
+  const checkProf = async () => {
+    if (!S) { profFor = null; window.setProf && setProf(false); return; }
+    if (profFor === S.user.id) return setProf(true);
+    let ok = false; try { const k = 'ptx-portal-prof'; ok = sessionStorage.getItem(k) === S.user.id || !!(await sb.rpc('ex_is_prof')).data; if (ok) sessionStorage.setItem(k, S.user.id); } catch (e) { }
+    if (!S) return; if (ok) profFor = S.user.id; setProf(ok);
+  };
+  const draw = () => {
+    checkProf();
+    document.body.classList.toggle('prof-on', !!S);
+    box.innerHTML = S ? `<button class="on" title="${esc(S.user.email)}">🔐 교수 로그인됨</button><button id="pOut">로그아웃</button>` : `<button id="pIn">교수 로그인</button>`;
+    const i = document.getElementById('pIn'), o = document.getElementById('pOut');
+    if (i) i.onclick = login; if (o) o.onclick = async () => { await sb.auth.signOut(); S = null; draw(); };
+  };
+  function login() {
+    const m = document.createElement('div'); m.className = 'p-mod';
+    m.innerHTML = `<form><h3>교수 로그인 (모든 수업 앱 공통)</h3><p style="margin:0;font-size:.85rem;color:#6b7a90">운동치료·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX·지도교수 상담을 이 계정 하나로 엽니다.</p>
+      <label>학교 메일<input name="em" type="email" autocomplete="username" value="${esc(CFG.profEmail || '')}" required></label>
+      <label>비밀번호<input name="pw" type="password" autocomplete="current-password" required></label>
+      <p class="err"></p><div class="row"><button type="button" class="no">취소</button><button class="go">로그인</button></div></form>`;
+    document.body.appendChild(m); const f = m.querySelector('form'); setTimeout(() => f.pw.focus(), 30);
+    m.querySelector('.no').onclick = () => m.remove(); m.onclick = e => { if (e.target === m) m.remove(); };
+    f.onsubmit = async e => {
+      e.preventDefault(); const err = f.querySelector('.err'); err.textContent = '';
+      const { data, error } = await sb.auth.signInWithPassword({ email: f.em.value.trim(), password: f.pw.value });
+      if (error) { err.textContent = /invalid/i.test(error.message) ? '메일 또는 비밀번호가 맞지 않습니다.' : error.message; return; }
+      const ok = await sb.rpc('ex_is_prof'); if (!ok.data) { await sb.auth.signOut(); err.textContent = '교수 권한이 없는 계정입니다.'; return; }
+      S = data.session; m.remove(); draw();
+    };
+  }
+  const wait = t => { let w = document.querySelector('.p-wait'); if (!t) { w && w.remove(); return; } if (!w) { w = document.createElement('div'); w.className = 'p-wait'; document.body.appendChild(w); } w.textContent = t; };
+  async function open(app, url) {
+    if (!S || !app || !app.sso || app.sso === 'same') return false;
+    const { data: { session } } = await sb.auth.getSession(); if (!session) { S = null; draw(); return false; }
+    wait(`${app.name} — 교수 로그인 넘기는 중…`);
+    try {
+      let tok;
+      if (app.sso === 'cs') {
+        const r = await fetch(CFG.aidx.url + '/functions/v1/sso-cs', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: CFG.aidx.key }, body: JSON.stringify({ access_token: session.access_token }) });
+        const j = await r.json(); if (!r.ok || !j.token_hash) throw new Error(j.error || r.status); tok = j.token_hash;
+      } else if (app.sso === 'aidx') {
+        const r = await fetch(CFG.aidx.url + '/functions/v1/sso-exchange', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: CFG.aidx.key }, body: JSON.stringify({ access_token: session.access_token }) });
+        const j = await r.json(); if (!r.ok || !j.token) throw new Error(j.error || r.status); tok = j.token;
+      } else {
+        const r = await fetch(CFG.url + '/functions/v1/sso-link', { method: 'POST', headers: { 'Content-Type': 'application/json', apikey: CFG.key, Authorization: 'Bearer ' + session.access_token }, body: '{}' });
+        const j = await r.json(); if (!r.ok || !j.token_hash) throw new Error(j.error || r.status); tok = j.token_hash;
+      }
+      const to = (url.split('#')[1] || '').replace(/^\//, ''); // 앱 안의 화면(#/account 등)을 이어서 열기
+      location.href = url.split('#')[0] + '#sso=' + tok + (to ? '&to=' + encodeURIComponent(to) : ''); return true;
+    } catch (e) { wait(''); alert('자동 로그인을 넘기지 못했습니다(' + e.message + '). 앱이 열리면 그 앱에서 같은 계정으로 로그인해 주세요.'); return false; }
+  }
+  document.addEventListener('click', async e => {
+    const a = e.target.closest('a.p-main, .p-subs a, a.p-q'); if (!a || !S || a.target === '_blank' || e.ctrlKey || e.metaKey || e.shiftKey) return;
+    const href = a.getAttribute('href'), app = APPS.find(x => href.startsWith(x.url)); if (!app || !app.sso || app.sso === 'same') return;
+    e.preventDefault(); if (!(await open(app, href))) location.href = href;
+  });
+  sb.auth.getSession().then(({ data }) => { S = data.session; draw(); });
+  sb.auth.onAuthStateChange((_e, session) => { S = session; draw(); });
+})();
+</script>
+<script src="univ-kit/univ-kit.js" defer data-app="학습 포털"></script>
+</body>
+</html>
