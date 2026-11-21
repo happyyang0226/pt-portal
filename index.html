@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>물리치료과 학습 포털 | 청암대학교</title>
-<meta name="description" content="청암대학교 물리치료과 수업 웹앱 모음: 기능해부학 · 운동치료 · 병리학 · 생리학 · 스포츠재활 · 환자 설문도구 · AIDX">
+<meta name="description" content="청암대학교 물리치료과 수업 웹앱 모음: 기능해부학 · 운동치료 · 근골격계 진단 및 평가 · 임상운동학 · 측정 및 평가 · 병리학 · 생리학 · 스포츠재활 · 근육 기원 통증 · 보행 분석 · 환자 설문도구 · AIDX">
 <meta name="theme-color" content="#27417f">
 <link rel="stylesheet" href="univ-kit/univ-kit.css">
 <style>
@@ -156,6 +156,17 @@ const APPS = [
     desc: '학습목표 → 문제 → 해설 → 오개념 심화학습 (14장)', tags: ['14장', '확신도', '심화학습'] },
   { id: 'sports', sso: 'zgv', group: 'g3', name: '스포츠재활총론', kicker: '3학년 · 전공 문제 학습', url: 'https://sports-rehab-learning.vercel.app/', icon: 'sport', color: '#5e9a2e',
     desc: '상해선수 재활 · 치유 과정 · 복귀 판단을 문제와 해설로 (24장)', tags: ['24장', '확신도', '심화학습'] },
+  { id: 'msk', group: 'g2', name: '근골격계 진단 및 평가', kicker: '2학년 · 15주', url: 'https://pt-msk-diagnosis.vercel.app/', icon: 'msk', color: '#27417f',
+    desc: '관절별 특수검사(방법 · 양성 소견 · 진단 정확도) · 주차별 퀴즈 260문항 · 특수검사 사전 · 강의안', tags: ['15주', '특수검사 53개', '퀴즈', '필기·용어'] },
+  { id: 'kineeval', group: 'g2', name: '임상운동학 · 측정 및 평가', kicker: '2학년 · 전공 문제 학습 · 국시 대비', url: 'https://pt-kine-eval-lab.vercel.app/', icon: 'exam', color: '#5380f0',
+    desc: 'KINE LAB(국시 운동학 5개 영역) · EVAL LAB(물리치료 진단평가) — 각 15주 · 중간·기말고사', tags: ['15주', '국시 대비', '중간·기말'],
+    subs: [['임상운동학 KINE LAB', 'kine/'], ['측정 및 평가 EVAL LAB', 'eval/']] },
+  { id: 'musclepain', group: 'major', name: '근육 기원 통증', kicker: '전공 강의 · 통합 웹앱', url: 'https://muscle-pain-lecture.vercel.app/', icon: 'muscle', color: '#b4233c',
+    desc: '근육 기원 통증 강의 슬라이드 · 내 노트(필기 · 메모)', tags: ['강의', '내 노트'] },
+  { id: 'gait', group: 'major', name: '보행 분석 실습실', kicker: '전공 실습 · 보행', url: 'https://gait-analysis-theta.vercel.app/', icon: 'walk', color: '#5e9a2e',
+    desc: '보행 주기 · 관절 움직임 관찰과 분석 실습', tags: ['보행 주기', '실습'] },
+  { id: 'gait3d', group: 'major', name: '보행 분석 3D 학습', kicker: '전공 학습 · 3D', url: 'https://gait-analysis-1.vercel.app/', icon: 'walk', color: '#0f6e74',
+    desc: '보행 주기 · 관절 움직임 · 근수축을 3D로 학습', tags: ['3D', '보행 주기', '근수축'] },
   { id: 'quest', sso: 'zgv', group: 'clinic', name: '물리치료 환자 설문도구', kicker: '임상 실습 도구', url: 'https://pt-questionaires.vercel.app/', icon: 'form', color: '#2f6f6a',
     desc: '부위별 표준 설문 채점 · 결과 해석 · 운동 처방 · 임상의사결정 연습', tags: ['QuickDASH', 'ODI', 'KOOS', 'PGQ'],
     subs: [['어깨·팔꿈치·손', 'upper/'], ['엉덩·무릎·발', 'lower/'], ['목·등·허리', 'spine/'], ['산전·산후', 'perinatal/']] },
@@ -166,6 +177,8 @@ const APPS = [
   { id: 'backup', sso: 'zgv', group: 'prof', name: '수업 웹앱 백업 센터', kicker: '교수용 · 교수 로그인', url: 'https://pt-exercise.vercel.app/#/account', icon: 'backup', color: '#5e9a2e',
     desc: '7개 앱(운동치료 및 실습·기능해부학·병리학·생리학·스포츠재활·설문도구·AIDX)을 한 파일로 백업 · 앱별 복원 · 복원 전 자동 백업', tags: ['7개 앱', '한 파일', '미리 보기 복원'] },
   // 국가고시 모의고사 자동출제(스트림릿판): 주소가 생기면 아래 줄의 url을 채우고 앞의 // 를 지우세요.
+  { id: 'neuro', group: 'prof', name: '신경해부생리학 운영실', kicker: '교수용 · 운영 전 검증 단계', url: 'https://neuro-pt-education.vercel.app/', icon: 'brain', color: '#126078',
+    desc: '제1~13장 강의자료 · 문항 초안 260개 · Vercel 로그인으로 보호(학생 공개 전)', tags: ['13장', '260문항', '비공개'] },
   // { id: 'exam2', group: 'prof', name: '국가고시 모의고사 자동출제', kicker: '교수용', url: '', icon: 'exam', color: '#27417f', desc: '과목별 회차 출제 · 문제은행 · 워드 내보내기', tags: ['교수용'] },
 ];
 /* ── 학습 웹앱 목록: 한 줄 = 카드 하나 (메뉴 「학습 웹앱」) ─────────────
@@ -198,6 +211,10 @@ const ICONS = {
   form: '<rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 3v3h6V3M8.5 11h7M8.5 15h4"/>',
   exam: '<path d="M4 5h16v14H4z"/><path d="M8 9h8M8 13h5"/>',
   chat: '<path d="M4 5h16v11H9l-5 4z"/><path d="M8 9h8M8 12h5"/>',
+  msk: '<path d="M8 3v7a4 4 0 0 0 8 0V3"/><circle cx="12" cy="17" r="3"/><path d="M12 14v-1"/>',
+  muscle: '<path d="M5 15c2-6 5-9 9-9 3 0 5 2 5 4 0 4-5 4-7 7s-3 4-7 4z"/><path d="M9 13c1.5 1 3 1 4.5 0"/>',
+  walk: '<circle cx="13" cy="4" r="2"/><path d="M10 21l2-6-2-3 1-4 3 2 3 1M12 15l3 2 1 4M11 8l-3 3-2 0"/>',
+  brain: '<path d="M9 4a3 3 0 0 0-3 3 3 3 0 0 0-2 5 3 3 0 0 0 2 5 3 3 0 0 0 5 2V5a3 3 0 0 0-2-1zM15 4a3 3 0 0 1 3 3 3 3 0 0 1 2 5 3 3 0 0 1-2 5 3 3 0 0 1-5 2V5a3 3 0 0 1 2-1z"/>',
   backup: '<ellipse cx="12" cy="6" rx="7" ry="3"/><path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6"/>'
 };
 const QUICK = [['run', '운동치료·실습', 'exercise'], ['bone', '해부학', 'anatomy'], ['cell', '병리학', 'pathology'], ['heart', '생리학', 'physiology'], ['sport', '스포츠재활', 'sports'], ['form', '설문도구', 'quest'], ['team', 'AIDX', 'aidx'], ['chat', '상담', 'counsel']];
